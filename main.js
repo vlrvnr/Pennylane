@@ -432,3 +432,38 @@ function sendCustomerInvoiceByMail(token, id) {
   const responseCode = response.getResponseCode();
   return responseCode === 204 ? `The invoice number ${id} has been sent by email.` : `Error: The invoice number ${id} has not been sent by email.`;
 }
+
+
+/**
+ * Set an imputation date to an customer invoice.
+ * @param {String} token API token.
+ * @param {String} id Existing invoice identifier (id).
+ * @return {String} A string.
+ */
+function setImputationDate(token, id) {
+  const url = `https://app.pennylane.com/api/external/v1/customer_invoices/${id}`;
+  const payload = {
+    invoice: {
+      deadline: '2024-08-1'
+      }
+  }
+  const options = {
+    method: 'PUT',
+    contentType: 'application/json',
+    headers: {
+      authorization: `Bearer ${token}`,
+      accept: 'application/json'
+    },
+    muteHttpExceptions: true,
+    payload: JSON.stringify(payload)
+  };
+    const response = UrlFetchApp.fetch(url, options);
+    const jsonResponse = JSON.parse(response);
+    const responseCode = response.getResponseCode();
+    console.log(responseCode)
+    if (responseCode === 200) {
+      return '200 - Imputation date has been added to the invoice.';
+    } else {
+      return jsonResponse;
+    }
+}
