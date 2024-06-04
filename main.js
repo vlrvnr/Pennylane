@@ -1,6 +1,7 @@
 /**
  * This library uses a basic authentication via an API key.
  * The Pennylane API documentation can be found here: https://pennylane.readme.io/reference/versioning
+ * Made by a non-programming guy.
  */
 
 
